@@ -7,7 +7,7 @@ import { Books } from '../model/books.interface';
 
 @Injectable()
 export class BooksService {
-    constructor(@InjectModel('Books') private readonly catModel: Model<Books>) {}
+  
 }
 
     
