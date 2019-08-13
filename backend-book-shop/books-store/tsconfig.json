@@ -8,7 +8,22 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
+    "paths": {  
+      "@BooksController": ["./controllers/books.controller"], 
+      "@UsersController": ["./controllers/users.controller"], 
+     
+      
+
+      "@BooksService": ["./services/books.service"], 
+      "@UsersService": ["./services/users.service"], 
+      "@AuthService": ["./services/auth.service"], 
+
+      "@Shemas": ["./documents/schemas/index"], 
+
+    
+      "@config": ["./environments/config/keys"], 
+    },
     "incremental": true
   },
   "exclude": ["node_modules", "dist"]

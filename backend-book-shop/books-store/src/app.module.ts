@@ -1,14 +1,33 @@
+// Main
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { BooksModule } from './modules/books.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from './modules/auth.module';
-import config from './environments/config/keys';
+//Controllers
+import { AppController } from './app.controller';
+import { BooksController } from '@BooksController';
+import { UsersController } from '@UsersController';
+//Services
+import { AppService } from './app.service';
+import { BooksService } from '@BooksService';
+import { UsersService } from '@UsersService';
+//Schemas
+import { BooksSchema, UsersSchema } from '@Shemas';
+import config from "@config";
 
 @Module({
-  imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),BooksModule, AuthModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),
+    MongooseModule.forFeature([
+      { name: 'Books', schema: BooksSchema },
+      { name: 'Users', schema: UsersSchema }
+    ]
+  )
+  ],
+  controllers: [
+                AppController,
+                BooksController,
+                UsersController],
+  providers: [
+              AppService,
+              BooksService,
+              UsersService],
 }) 
 export class AppModule {}
