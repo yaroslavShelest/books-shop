@@ -1,7 +1,6 @@
 Read
   
- I
- nstallation
+Installation
 $ npm install
 Running the app
 # development

@@ -3,15 +3,13 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 //Controllers
 import { AppController } from './app.controller';
-import { BooksController } from '@BooksController';
-import { UsersController } from '@UsersController';
+import { AuthController, BooksController,UsersController,AuthorsController } from 'src/controllers/index';
 //Services
 import { AppService } from './app.service';
-import { BooksService } from '@BooksService';
-import { UsersService } from '@UsersService';
+import { AuthService,BooksService,UsersService, AuthorsService } from 'src/services/index';
 //Schemas
-import { BooksSchema, UsersSchema } from '@Shemas';
-import config from "@config";
+import { BooksSchema, UsersSchema } from 'src/documents/schemas/index';
+import config from "src/environments/config/keys";
 
 @Module({
   imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),
@@ -23,11 +21,15 @@ import config from "@config";
   ],
   controllers: [
                 AppController,
+                AuthorsController,
+                AuthController,
                 BooksController,
                 UsersController],
-  providers: [
-              AppService,
-              BooksService,
-              UsersService],
+  providers:   [
+                AppService,
+                AuthService,
+                AuthorsService,
+                BooksService,
+                UsersService],
 }) 
 export class AppModule {}

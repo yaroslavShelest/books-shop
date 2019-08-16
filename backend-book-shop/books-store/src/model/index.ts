@@ -1,2 +1,3 @@
-export * from './books.interface';
-export * from './users.interface';
+export * from './books.model';
+export * from './users.model';
+export * from './authors.model'
