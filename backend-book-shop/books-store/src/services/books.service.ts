@@ -20,6 +20,19 @@ export class BooksService {
     public async delete(id: string): Promise<Books> {
         return await this.bookModel.findByIdAndRemove(id);
     }
+
+    public async getAll(): Promise<Books[]> {
+        const book = await this.bookModel.find();
+       
+        return  await  book;
+      }
+
+    public async getOneBook(id: string): Promise<Books> {
+        const param = { _id: id };
+
+        return await this.bookModel.find(param);
+
+    } 
 }
 
     
