@@ -1,4 +1,4 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('books')
+@Controller('authors')
 export class AuthorsController {}
