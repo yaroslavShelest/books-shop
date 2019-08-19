@@ -1,3 +1,3 @@
 export default {
-    mongoURI: 'mongodb://localhost:27017/book-store',
+    mongoURI: 'mongodb+srv://yaroslav:qazxswedc17@cluster0-uzpn8.mongodb.net/test?retryWrites=true&w=majority',
 }; 
