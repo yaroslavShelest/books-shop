@@ -2,10 +2,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 //Controllers
-import { AppController } from './app.controller';
 import { AuthController, BooksController,UsersController,AuthorsController } from 'src/controllers/index';
 //Services
-import { AppService } from './app.service';
 import { AuthService,BooksService,UsersService, AuthorsService } from 'src/services/index';
 //Schemas
 import { BooksSchema, UsersSchema } from 'src/documents/schemas/index';
@@ -20,13 +18,11 @@ import config from "src/environments/config/keys";
   )
   ],
   controllers: [
-                AppController,
                 AuthorsController,
                 AuthController,
                 BooksController,
                 UsersController],
   providers:   [
-                AppService,
                 AuthService,
                 AuthorsService,
                 BooksService,
