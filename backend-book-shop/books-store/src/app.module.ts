@@ -30,6 +30,6 @@ import { DatabaseProviders } from 'src/provaiders/data.base.provaiders';
                 BooksService,
                 UsersService,
                 ...DatabaseProviders
-                ],
+                ]
 }) 
 export class AppModule {}

@@ -9,6 +9,7 @@ import { Books } from 'src/model/books.model';
 export class BooksService {
     constructor(
         @InjectModel('Books') private readonly bookModel: Model<Books>
+        
     ) {
 
     }
