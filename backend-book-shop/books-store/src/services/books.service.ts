@@ -12,15 +12,6 @@ export class BooksService {
     ) {
 
     }
-    public async create(book: Books): Promise<Books> {
-        const createdBook = new this.bookModel(book);
-
-        return await createdBook.save();
-
-    }
-    public async delete(id: string): Promise<Books> {
-        return await this.bookModel.findByIdAndRemove(id);
-    }
 
     public async getAll(): Promise<Books[]> {
         const book = await this.bookModel.find();
@@ -34,6 +25,20 @@ export class BooksService {
         return await this.bookModel.find(param);
 
     } 
+
+    public async create(book: Books): Promise<Books> {
+        const createdBook = new this.bookModel(book);
+
+        return await createdBook.save();
+
+    }
+    public async delete(id: string): Promise<Books> {
+        return await this.bookModel.findByIdAndRemove(id);
+    }
+
+ 
+
+    
     public async update(id: string, book: Books): Promise<Books> {
         return await this.bookModel.findByIdAndUpdate(id, book, { new: true });
  }

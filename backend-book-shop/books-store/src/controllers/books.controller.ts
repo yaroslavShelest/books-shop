@@ -6,12 +6,7 @@ import { BooksService } from 'src/services/books.service';
 export class BooksController {
     constructor(private booksService: BooksService) { }
 
-    @Post('create')
-    public async addBook(@Body() Book: Books) {
-        const book = await this.booksService.create(Book);
-        return book;
-    }
-    
+
     @Get('getAll')
 
     public async getAll(): Promise<Books[]> {
@@ -20,14 +15,21 @@ export class BooksController {
 
     }
 
-    @Get('getOneBook')
+    @Get('getOneBook/:id')
 
     public async getById(@Param('id') id: string): Promise<Books> {
 
         return this.booksService.getOneBook(id);
 
     }
-    @Delete('deleteBook')
+    @Post('create')
+    public async addBook(@Body() Book: Books) {
+        const book = await this.booksService.create(Book);
+        return book;
+    }
+    
+    
+    @Delete('deleteBook/:id')
 
     public async deleteBook(@Param('id') id: string): Promise<any> {
 
@@ -35,8 +37,6 @@ export class BooksController {
 
     }
 
-
- 
 }
 
 
