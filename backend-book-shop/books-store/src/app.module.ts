@@ -10,6 +10,9 @@ import { BooksSchema, UsersSchema } from 'src/documents/schemas/index';
 import config from "src/environments/config/keys";
 //Provaiders
 import { DatabaseProviders } from 'src/provaiders/data.base.provaiders';
+import { BooksProviders } from 'src/provaiders/books.provaiders'
+// Repositories
+import { BooksRepository } from 'src/repozitories/repozitories.books'
 
 @Module({
   imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),
@@ -29,7 +32,9 @@ import { DatabaseProviders } from 'src/provaiders/data.base.provaiders';
                 AuthorsService,
                 BooksService,
                 UsersService,
-                ...DatabaseProviders
+                BooksRepository,
+                ...DatabaseProviders,
+                ...BooksProviders
                 ]
 }) 
 export class AppModule {}

@@ -1,44 +1,37 @@
-import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 
 import { Books } from 'src/model/books.model';
+import { BooksRepository } from 'src/repozitories/repozitories.books'
 
 
 @Injectable()
 export class BooksService {
-    constructor(
-        @InjectModel('Books') private readonly bookModel: Model<Books>
-        
-    ) {
-
-    }
+    constructor(private readonly bookServiceRepository: BooksRepository) {}
 
     public async getAll(): Promise<Books[]> {
-        const book = await this.bookModel.find();
+        const book = await this.bookServiceRepository.getAll();
        
         return  await  book;
       }
 
     public async getOneBook(id: string): Promise<Books> {
-        const param = { _id: id };
+        
 
-        return await this.bookModel.find(param);
+        return await this.bookServiceRepository.findOne(id);
 
     } 
 
     public async create(book: Books): Promise<Books> {
-        const createdBook = new this.bookModel(book);
-
-        return await createdBook.save();
-
+        return await this.bookServiceRepository.create(book);
     }
+
+  
     public async delete(id: string): Promise<Books> {
-        return await this.bookModel.findByIdAndRemove(id);
+        return await this.bookServiceRepository.delete(id);
     }
     
     public async update(id: string, book: Books): Promise<Books> {
-        return await this.bookModel.findByIdAndUpdate(id, book, { new: true });
+        return await this.bookServiceRepository.update(id, book);
  }
 }
 
