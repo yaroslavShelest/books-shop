@@ -8,6 +8,8 @@ import { AuthService,BooksService,UsersService, AuthorsService } from 'src/servi
 //Schemas
 import { BooksSchema, UsersSchema } from 'src/documents/schemas/index';
 import config from "src/environments/config/keys";
+//Provaiders
+import { DatabaseProviders } from 'src/provaiders/data.base.provaiders';
 
 @Module({
   imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),
@@ -26,6 +28,8 @@ import config from "src/environments/config/keys";
                 AuthService,
                 AuthorsService,
                 BooksService,
-                UsersService],
+                UsersService,
+                ...DatabaseProviders
+                ],
 }) 
 export class AppModule {}
