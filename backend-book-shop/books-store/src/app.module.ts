@@ -1,6 +1,7 @@
 // Main
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PassportModule } from '@nestjs/passport';
 //Controllers
 import { AuthController, BooksController,UsersController,AuthorsController } from 'src/controllers/index';
 //Services
@@ -16,6 +17,8 @@ import { UsersProviders } from 'src/provaiders/users.provaiders'
 // Repositories
 import { BooksRepository } from 'src/repozitories/repozitories.books'
 import { UserRepository } from 'src/repozitories/repozitories.users'
+
+// JWT
 
 
 @Module({

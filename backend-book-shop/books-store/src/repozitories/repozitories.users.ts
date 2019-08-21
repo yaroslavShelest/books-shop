@@ -17,7 +17,7 @@ export class UserRepository {
 
     async  getOneUser(id: String): Promise<User> {
         const param = { _id: id };
-        return await this.userRepModel.getOneUser({param });
+        return await this.userRepModel.findOne({param });
       }
 
     async create(user: User): Promise<User> {
@@ -32,7 +32,9 @@ export class UserRepository {
     async delete(id: String): Promise<User> {
         return await this.userRepModel.findByIdAndRemove(id);
       } 
-
+     async findOneByName(username: String): Promise<User> {
+        return await this.userRepModel.findOne({tipidor: username});
+      }
     
 
 }

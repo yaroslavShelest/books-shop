@@ -7,7 +7,7 @@ import { BooksRepository } from 'src/repozitories/repozitories.books'
 @Injectable()
 export class BooksService {
     constructor(private readonly bookServiceRepository: BooksRepository) {
-        
+
     }
 
     public async getAll(): Promise<Books[]> {
@@ -19,7 +19,7 @@ export class BooksService {
     public async getOneBook(id: string): Promise<Books> {
         
 
-        return await this.bookServiceRepository.findOne(id);
+        return await this.bookServiceRepository.getOneBook(id);
 
     } 
 

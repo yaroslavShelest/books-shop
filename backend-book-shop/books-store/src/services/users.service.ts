@@ -31,11 +31,15 @@ export class UsersService {
 
     }
 
-    async update( user: Users, id: string): Promise<Users> {
+    public async update( user: Users, id: string): Promise<Users> {
         return await this.usersServiceRepository.update(id, user,);
  }
+    public async findOneByUsername(user: string): Promise<Users | undefined> {
+    return await this.usersServiceRepository.findOneByName(user);
+  }
 
 }
+
 
    
 

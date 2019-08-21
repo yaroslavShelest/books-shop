@@ -20,7 +20,7 @@ export class BooksRepository {
         return await this.bookRepModel.find().exec();
       }
     
-      async findOne(id: String): Promise<Book> {
+      async getOneBook(id: String): Promise<Book> {
         const param = { _id: id };
         return await this.bookRepModel.findOne({param });
       }
