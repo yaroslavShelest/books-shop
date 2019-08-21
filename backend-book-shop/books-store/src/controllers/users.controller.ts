@@ -19,7 +19,7 @@ export class UsersController {
 
     public getUserById(@Param('id') id: string): Promise<Users> {
 
-        return this.usersService.findOne(id);
+        return this.usersService.getOneUser(id);
 
     }
 

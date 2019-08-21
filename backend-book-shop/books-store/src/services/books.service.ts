@@ -6,7 +6,9 @@ import { BooksRepository } from 'src/repozitories/repozitories.books'
 
 @Injectable()
 export class BooksService {
-    constructor(private readonly bookServiceRepository: BooksRepository) {}
+    constructor(private readonly bookServiceRepository: BooksRepository) {
+        
+    }
 
     public async getAll(): Promise<Books[]> {
         const book = await this.bookServiceRepository.getAll();

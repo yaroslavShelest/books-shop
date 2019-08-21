@@ -2,7 +2,7 @@ import { Connection } from 'mongoose';
 import { UsersSchema } from 'src/documents/schemas/index';
 
 
-export const BooksProviders = [
+export const UsersProviders = [
   {
     provide: 'USER_MODEL',
     useFactory: (connection: Connection) => connection.model('Users', UsersSchema),
