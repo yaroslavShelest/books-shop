@@ -1,9 +1,8 @@
 // Main
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+// import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from 'src/strategy/strategy';
-import { JwtModule } from '@nestjs/jwt';
+
 
 //Controllers
 import { AuthController, BooksController,UsersController,AuthorsController } from 'src/controllers/index';
@@ -21,8 +20,10 @@ import { UsersProviders } from 'src/provaiders/users.provaiders'
 import { BooksRepository } from 'src/repozitories/repozitories.books'
 import { UserRepository } from 'src/repozitories/repozitories.users'
 
-
+// jwt
 import { jwtConstants } from 'src/strategy/constants';
+import { JwtModule } from '@nestjs/jwt';
+import { LocalStrategy } from 'src/strategy/strategy';
 
 @Module({
   imports: 
