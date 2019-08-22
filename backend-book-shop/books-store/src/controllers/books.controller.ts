@@ -1,5 +1,5 @@
 import { Controller, Body,Param, Post,Get,Delete} from '@nestjs/common';
-import { Books } from 'src/model/books.model';
+import { Book } from 'src/model/books.model';
 import { BooksService } from 'src/services/books.service';
 
 @Controller('books')
@@ -9,7 +9,7 @@ export class BooksController {
 
     @Get('getAll')
 
-    public async getAll(): Promise<Books[]> {
+    public async getAll(): Promise<Book[]> {
 
         return this.booksService.getAll();
 
@@ -17,13 +17,13 @@ export class BooksController {
 
     @Get('getOneBook/:id')
 
-    public async getById(@Param('id') id: string): Promise<Books> {
+    public async getById(@Param('id') id: string): Promise<Book> {
 
         return this.booksService.getOneBook(id);
 
     }
     @Post('create')
-    public async addBook(@Body() Book: Books) {
+    public async addBook(@Body() Book: Book) {
         const book = await this.booksService.create(Book);
         return book;
     }
