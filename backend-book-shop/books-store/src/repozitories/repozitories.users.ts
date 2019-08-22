@@ -33,7 +33,7 @@ export class UserRepository {
         return await this.userRepModel.findByIdAndRemove(id);
       } 
      async findOneByName(username: String): Promise<User> {
-        return await this.userRepModel.findOne({tipidor: username});
+        return await this.userRepModel.findOne({username: username});
       }
     
 
