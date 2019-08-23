@@ -21,6 +21,7 @@ import { BooksRepository } from 'src/repozitories/repozitories.books'
 import { UserRepository } from 'src/repozitories/repozitories.users'
 
 // jwt
+import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { jwtConstants } from 'src/strategy/constants';
 import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from 'src/strategy/strategy';
@@ -56,6 +57,7 @@ import { LocalStrategy } from 'src/strategy/strategy';
                 BooksRepository,
                 UserRepository,
                 LocalStrategy,
+                JwtStrategy,
                 ...DatabaseProviders,
                 ...BooksProviders,
                 ...UsersProviders
