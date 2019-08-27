@@ -15,7 +15,7 @@ export class UserRepository {
         return await this.userRepModel.find().exec();
       }
 
-    async  getOneUser(id: String): Promise<User> {
+    async  getOneUser(id: string): Promise<User> {
         const param = { _id: id };
         return await this.userRepModel.findOne({param });
       }
@@ -25,17 +25,13 @@ export class UserRepository {
         return await createdUser.save();
       }
 
-    async update(id: String, user: User): Promise<User> {
+    async update(id: string, user: User): Promise<User> {
         return await this.userRepModel.findByIdAndUpdate(id, user, { new: true });
       }
-    
-    async delete(id: String): Promise<User> {
+    async delete(id: string): Promise<User> {
         return await this.userRepModel.findByIdAndRemove(id);
-      } 
-     async findOneByName(username: String): Promise<User> {
-        return await this.userRepModel.findOne({username: username});
-        
       }
-    
-
+     async findOneByName(username: string): Promise<User> {
+        return await this.userRepModel.findOne( { username: username} );
+      }
 }
