@@ -1,7 +1,6 @@
-import { Controller,UseGuards,Post,Request,Get } from '@nestjs/common';
+import { Controller, UseGuards, Post, Request, Get } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from 'src/services/auth.service';
-
 
 // @Controller('api')
 // export class AuthController {
@@ -26,5 +25,4 @@ export class AuthController {
   getProfile(@Request() req) {
     return req.user;
   }
-  
 }

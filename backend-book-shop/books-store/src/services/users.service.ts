@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { Users } from 'src/model/users.model'
-import { UserRepository } from 'src/repozitories/repozitories.users'
-
-
+import { Users } from 'src/model/users.model';
+import { UserRepository } from 'src/repozitories/repozitories.users';
 
 @Injectable()
 export class UsersService {
@@ -14,12 +12,9 @@ export class UsersService {
     public async findAll(): Promise<Users[]> {
         return await this.usersServiceRepository.findAll();
     }
-    
     public async getOneUser(id: string): Promise<Users> {
         return await this.usersServiceRepository.getOneUser(id);
     }
-
-
     public async create(users: Users): Promise<Users> {
         return await this.usersServiceRepository.create(users);
 
@@ -32,19 +27,9 @@ export class UsersService {
     }
 
     public async update( user: Users, id: string): Promise<Users> {
-        return await this.usersServiceRepository.update(id, user,);
- }
+        return await this.usersServiceRepository.update(id, user);
+    }
     public async findOneByUsername(user: string): Promise<Users | undefined> {
     return await this.usersServiceRepository.findOneByName(user);
   }
-
 }
-
-
-   
-
-
-
-
-
-    
