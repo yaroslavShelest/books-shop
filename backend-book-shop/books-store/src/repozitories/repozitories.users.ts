@@ -31,7 +31,7 @@ export class UserRepository {
     async delete(id: string): Promise<User> {
         return await this.userRepModel.findByIdAndRemove(id);
       }
-    async findOneByName(username: string): Promise<User> {
-        return await this.userRepModel.findOne( { username: username} );
+    async findOneByName(userlogin: string): Promise<User> {
+        return await this.userRepModel.findOne( { username: userlogin} );
       }
 }

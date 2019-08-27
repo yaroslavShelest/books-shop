@@ -8,6 +8,7 @@ export class BooksRepository {
         @Inject('BOOK_MODEL')
         private readonly bookRepModel: Model<Book>,
       ) {
+
       }
       async create(book: Book): Promise<Book> {
         const createdBook = new this.bookRepModel(book);
