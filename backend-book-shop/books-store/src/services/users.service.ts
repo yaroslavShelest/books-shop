@@ -6,7 +6,6 @@ import { UserRepository } from 'src/repozitories/repozitories.users';
 @Injectable()
 export class UsersService {
     constructor(private readonly usersServiceRepository: UserRepository) {
-
     }
 
     public async findAll(): Promise<Users[]> {
@@ -21,9 +20,7 @@ export class UsersService {
     }
 
     public async delete(id: string): Promise<Users> {
-
         return await this.usersServiceRepository.delete(id);
-
     }
 
     public async update( user: Users, id: string): Promise<Users> {
@@ -31,5 +28,5 @@ export class UsersService {
     }
     public async findOneByUsername(user: string): Promise<Users | undefined> {
     return await this.usersServiceRepository.findOneByName(user);
-  }
+    }
 }

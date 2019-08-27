@@ -5,5 +5,4 @@ export interface Books {
     description: string;
     authors: any[];
     coast: string;
-    
 }
