@@ -1,15 +1,13 @@
 // Main
 import { Module } from '@nestjs/common';
-// import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 
 // Controllers
 import { AuthController, BooksController, UsersController, AuthorsController } from 'src/controllers/index';
+
 // Services
 import { AuthService, BooksService, UsersService, AuthorsService } from 'src/services/index';
-// Schemas
-// import { BooksSchema, UsersSchema } from 'src/documents/schemas/index';
-// import config from "src/environments/config/keys";
+
 // Provaiders
 import { DatabaseProviders } from 'src/provaiders/data.base.provaiders';
 import { BooksProviders } from 'src/provaiders/books.provaiders';
@@ -31,17 +29,10 @@ import { LocalStrategy } from 'src/strategy/strategy';
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {
-        expiresIn: '60s'
+        expiresIn: '60s',
 
       },
-    })
-
-  //     MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),
-  //     MongooseModule.forFeature([
-  //     { name: 'Books', schema: BooksSchema },
-  //     { name: 'Users', schema: UsersSchema }
-  //   ]
-  // )
+    }),
   ],
   controllers: [
                 AuthorsController,
@@ -59,7 +50,7 @@ import { LocalStrategy } from 'src/strategy/strategy';
                 JwtStrategy,
                 ...DatabaseProviders,
                 ...BooksProviders,
-                ...UsersProviders
-                ]
+                ...UsersProviders,
+                ],
 })
 export class AppModule {}

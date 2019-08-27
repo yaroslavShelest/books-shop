@@ -4,5 +4,5 @@ export interface Users {
     email: string;
     password: string;
     typeOfUser: string;
-    created:Date;
+    created: Date;
 }

@@ -4,7 +4,6 @@ import { Book } from 'src/documents/documentMongo/doc.books';
 
 @Injectable()
 export class BooksRepository {
-
     constructor(
         @Inject('BOOK_MODEL')
         private readonly bookRepModel: Model<Book>,
