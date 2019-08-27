@@ -34,6 +34,7 @@ export class UserRepository {
       } 
      async findOneByName(username: String): Promise<User> {
         return await this.userRepModel.findOne({username: username});
+        
       }
     
 
