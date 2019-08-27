@@ -9,9 +9,9 @@ import { AuthController, BooksController, UsersController, AuthorsController } f
 import { AuthService, BooksService, UsersService, AuthorsService } from 'src/services/index';
 
 // Provaiders
-import { DatabaseProviders } from 'src/provaiders/data.base.provaiders';
-import { BooksProviders } from 'src/provaiders/books.provaiders';
-import { UsersProviders } from 'src/provaiders/users.provaiders';
+import { DatabaseProviders } from 'src/providers/data.base.provaiders';
+import { BooksProviders } from 'src/providers/books.provaiders';
+import { UsersProviders } from 'src/providers/users.provaiders';
 
 // Repositories
 import { BooksRepository } from 'src/repozitories/repozitories.books';
