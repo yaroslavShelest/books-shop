@@ -1,6 +1,7 @@
 import { Controller, Get, Body, Post, Response, Delete, HttpStatus, Param, Put, NotFoundException} from '@nestjs/common';
 import { UsersService } from 'src/services/index';
 import { Users } from 'src/model/users.model';
+import { Roles } from 'src/common/guards/roles.decorator';
 
 @Controller('users')
 // @UseGuards(RolesGuard)
@@ -8,17 +9,18 @@ export class UsersController {
     constructor(private usersService: UsersService) {}
 
     @Get('getAll')
+    @Roles('admin')
     public getAll(): Promise<Users[]> {
         return this.usersService.getAll();
     }
 
     @Get('getUserById/:id')
-
     public getUserById(@Param('id') id: string): Promise<Users> {
         return this.usersService.getOneUser(id);
     }
 
     @Post('')
+    @Roles('admin')
     public async addUser(@Response() res, @Body() user: Users) {
         const newUser = await this.usersService.create(user);
         return res.status(HttpStatus.OK).json({

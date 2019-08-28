@@ -1,6 +1,8 @@
 // Main
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'src/common/guards/auth.guard';
 
 // Controllers
 import { AuthController, BooksController, UsersController, AuthorsController } from 'src/controllers/index';
@@ -31,7 +33,7 @@ import { LocalStrategy } from 'src/strategy/strategy';
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {
-        expiresIn: '60s',
+        expiresIn: '600s',
 
       },
     }),
@@ -42,6 +44,10 @@ import { LocalStrategy } from 'src/strategy/strategy';
                 BooksController,
                 UsersController],
   providers:   [
+               {
+                provide: APP_GUARD,
+                useClass: RolesGuard,
+                },
                 AuthService,
                 AuthorsService,
                 BooksService,

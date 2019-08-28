@@ -9,7 +9,7 @@ export class BooksService {
 
     public async getAll(): Promise<Books[]> {
         const book = await this.bookServiceRepository.getAll();
-        return  await  book;
+        return book;
       }
 
     public async getOneBook(id: string): Promise<Books> {
