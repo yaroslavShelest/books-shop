@@ -6,7 +6,7 @@ import { AuthorDoc } from 'src/documents/documentMongo/doc.authors';
 export class AuthorRepository {
   constructor(
     @Inject('AUTHOR_MODEL')
-    private readonly authorModel: Model<AuthorDoc>,
+    private readonly authorRepModel: Model<AuthorDoc>,
   ) {}
 
 }

@@ -5,9 +5,7 @@ import { BooksService } from 'src/services/books.service';
 @Controller('books')
 export class BooksController {
     constructor(
-        private booksService: BooksService) {
-
-        }
+        private booksService: BooksService) {}
 
     @Get('getAll')
     public async getAll(): Promise<Books[]> {

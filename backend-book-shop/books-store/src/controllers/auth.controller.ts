@@ -5,19 +5,15 @@ import { AuthService } from 'src/services/auth.service';
 @Controller('api')
 export class AuthController {
   constructor(
-    private readonly authService: AuthService) {
-
-    }
+    private readonly authService: AuthService) {}
 
   @UseGuards(AuthGuard('local'))
-
   @Post('login')
   async login(@Request() req) {
-    return this.authService.login(req.body);
+    return this.authService.getToken(req.body);
   }
 
   @UseGuards(AuthGuard('jwt'))
-
   @Get('me')
   getProfile(@Request() req) {
     return req.user;

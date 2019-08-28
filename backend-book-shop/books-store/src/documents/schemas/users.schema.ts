@@ -5,4 +5,4 @@ export const UsersSchema = new mongoose.Schema({
     password: String,
     typeOfUser: String,
     created: { type: Date, default: Date.now },
-})
+});

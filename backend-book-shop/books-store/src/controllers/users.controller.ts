@@ -4,7 +4,7 @@ import { Users } from 'src/model/users.model';
 
 @Controller('users')
 export class UsersController {
-    constructor(private usersService: UsersService) { }
+    constructor(private usersService: UsersService) {}
 
     @Get('getAll')
     public getAll(): Promise<Users[]> {
