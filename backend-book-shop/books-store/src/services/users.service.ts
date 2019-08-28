@@ -7,8 +7,8 @@ export class UsersService {
     constructor(
         private readonly usersServiceRepository: UserRepository) {}
 
-    public async findAll(): Promise<Users[]> {
-        return await this.usersServiceRepository.findAll();
+    public async getAll(): Promise<Users[]> {
+        return await this.usersServiceRepository.getAll();
     }
 
     public async getOneUser(id: string): Promise<Users> {

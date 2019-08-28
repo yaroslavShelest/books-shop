@@ -11,7 +11,7 @@ export class UserRepository {
 
     }
 
-    async findAll(): Promise<UserDoc[]> {
+    async getAll(): Promise<UserDoc[]> {
         return await this.userRepModel.find().exec();
       }
 

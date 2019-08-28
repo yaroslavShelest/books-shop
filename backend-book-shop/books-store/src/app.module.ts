@@ -12,10 +12,12 @@ import { AuthService, BooksService, UsersService, AuthorsService } from 'src/ser
 import { DatabaseProviders } from 'src/providers/data.base.provaiders';
 import { BooksProviders } from 'src/providers/books.provaiders';
 import { UsersProviders } from 'src/providers/users.provaiders';
+import { AuthorProviders } from 'src/providers/authors.provaiders';
 
 // Repositories
 import { BooksRepository } from 'src/repozitories/repozitories.books';
 import { UserRepository } from 'src/repozitories/repozitories.users';
+import { AuthorRepository } from 'src/repozitories/repozitories.authors';
 
 // jwt
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
@@ -46,11 +48,13 @@ import { LocalStrategy } from 'src/strategy/strategy';
                 UsersService,
                 BooksRepository,
                 UserRepository,
+                AuthorRepository,
                 LocalStrategy,
                 JwtStrategy,
                 ...DatabaseProviders,
                 ...BooksProviders,
                 ...UsersProviders,
+                ...AuthorProviders,
                 ],
 })
 export class AppModule {}

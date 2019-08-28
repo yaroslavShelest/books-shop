@@ -3,12 +3,13 @@ import { UsersService } from 'src/services/index';
 import { Users } from 'src/model/users.model';
 
 @Controller('users')
+// @UseGuards(RolesGuard)
 export class UsersController {
     constructor(private usersService: UsersService) {}
 
     @Get('getAll')
     public getAll(): Promise<Users[]> {
-        return this.usersService.findAll();
+        return this.usersService.getAll();
     }
 
     @Get('getUserById/:id')
@@ -18,7 +19,7 @@ export class UsersController {
     }
 
     @Post('')
-    async addUser(@Response() res, @Body() user: Users) {
+    public async addUser(@Response() res, @Body() user: Users) {
         const newUser = await this.usersService.create(user);
         return res.status(HttpStatus.OK).json({
             message: 'User has been submitted successfully!',
@@ -27,7 +28,7 @@ export class UsersController {
     }
 
     @Put(':id')
-    async editUser(@Param('id') user: Users, @Body() id: string) {
+    public async editUser(@Param('id') user: Users, @Body() id: string) {
         const users = await this.usersService.update(user , id);
         return users;
     }
@@ -39,7 +40,7 @@ export class UsersController {
     }
 
     @Get('user/:username')
-    async getUserByName(@Response() res, @Param('username') user) {
+    public async getUserByName(@Response() res, @Param('username') user) {
         const fetchedUser = await this.usersService.findOneByUsername(user);
         if (!fetchedUser) {
             throw new NotFoundException('User does not exist!');
