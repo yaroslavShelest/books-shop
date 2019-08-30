@@ -1,6 +1,9 @@
 import { Controller,  Get, Param, Body, Post, Put, Delete} from '@nestjs/common';
 import { AuthorsService } from 'src/services/index';
 import { Authors } from 'src/model/index';
+import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
+
+@ApiUseTags('authors')
 
 @Controller('authors')
 export class AuthorsController {

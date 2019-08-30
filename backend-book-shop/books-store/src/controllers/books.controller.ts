@@ -1,6 +1,10 @@
 import { Controller, Body, Param, Post, Get, Delete} from '@nestjs/common';
 import { Books } from 'src/model/books.model';
 import { BooksService } from 'src/services/books.service';
+import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
+
+@ApiUseTags('books')
+@ApiBearerAuth()
 
 @Controller('books')
 export class BooksController {

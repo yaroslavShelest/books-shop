@@ -8,15 +8,16 @@ export class RolesGuard implements CanActivate {
 
   canActivate(
     context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  ): boolean {
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
     if (!roles) {
       return true;
     }
+
     const request = context.switchToHttp().getRequest();
-    const user = request.user;
+    const user = request.user; // Не определен. Тут вроде undefind . Или я вообще запутался)))
     const hasRole = () =>
-     user.roles.some((role) => roles.includes(role));
+      user.roles.some(role => !!roles.find(item => item === role));
 
     return user && user.roles && hasRole();
   }

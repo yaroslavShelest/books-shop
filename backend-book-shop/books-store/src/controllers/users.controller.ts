@@ -1,10 +1,13 @@
-import { Controller, Get, Body, Post, Response, Delete, HttpStatus, Param, Put, NotFoundException} from '@nestjs/common';
+import { Controller, Get, Body, Post, Response, Delete, HttpStatus, Param, Put, NotFoundException, UseGuards} from '@nestjs/common';
+import { SetMetadata } from '@nestjs/common';
 import { UsersService } from 'src/services/index';
+import { RolesGuard } from 'src/common/guards/auth.guard';
 import { Users } from 'src/model/users.model';
 import { Roles } from 'src/common/guards/roles.decorator';
+import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('users')
-// @UseGuards(RolesGuard)
+@UseGuards(RolesGuard)
 export class UsersController {
     constructor(private usersService: UsersService) {}
 
