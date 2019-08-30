@@ -10,7 +10,7 @@ export class Users {
     @ApiModelProperty()
     password: string;
     @ApiModelProperty()
-    typeOfUser: string;
+    roleOfUser: boolean;
     @ApiModelProperty()
     createdDate: Date;
 }

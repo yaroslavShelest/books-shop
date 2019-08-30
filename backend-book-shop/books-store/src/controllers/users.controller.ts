@@ -6,6 +6,9 @@ import { Users } from 'src/model/users.model';
 import { Roles } from 'src/common/guards/roles.decorator';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiUseTags('users')
+@ApiBearerAuth()
+
 @Controller('users')
 @UseGuards(RolesGuard)
 export class UsersController {
@@ -23,7 +26,7 @@ export class UsersController {
     }
 
     @Post('')
-    @Roles('admin')
+    // @Roles('admin')
     public async addUser(@Response() res, @Body() user: Users) {
         const newUser = await this.usersService.create(user);
         return res.status(HttpStatus.OK).json({

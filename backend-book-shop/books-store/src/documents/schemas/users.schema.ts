@@ -3,6 +3,6 @@ import * as mongoose from 'mongoose';
 export const UsersSchema = new mongoose.Schema({
     username: String,
     password: String,
-    typeOfUser: String,
+    roleOfUser: Boolean,
     created: { type: Date, default: Date.now },
 });
