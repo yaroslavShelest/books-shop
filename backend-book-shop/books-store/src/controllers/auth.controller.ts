@@ -13,7 +13,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post()
-  @ApiResponse({ status: 201, description: 'The TOKEN has been successfully fetched.'})
+  @ApiResponse({ status: 201, description: 'The TOKENS has been successfully fetched.'})
   @ApiResponse({ status: 403, description: 'Forbidden.'})
   async login(@Request() req) {
     return this.authService.getToken(req.body);
