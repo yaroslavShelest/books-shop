@@ -44,10 +44,10 @@ import { ConfigService } from 'src/environments/config/config.service';
                 provide: APP_GUARD,
                 useClass: RolesGuard,
                 },
-                {
-                  provide: ConfigService,
-                  useValue: new ConfigService(`${process.env.NODE_ENV}.env`),
-                },
+                // {
+                //   provide: ConfigService,
+                //   useValue: new ConfigService(`${process.env.NODE_ENV}.env`),
+                // },
                 AuthService,
                 AuthorsService,
                 BooksService,

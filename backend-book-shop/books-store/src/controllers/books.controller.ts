@@ -1,4 +1,4 @@
-import { Controller, Body, Param, Post, Get, Delete} from '@nestjs/common';
+import { Controller, Body, Param, Post, Put, Get, Delete} from '@nestjs/common';
 import { Books , CreateBooks} from 'src/model/index';
 import { BooksService } from 'src/services/books.service';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
@@ -28,7 +28,7 @@ export class BooksController {
     @Post('create')
     @ApiResponse({ status: 201, description: 'The books has been successfully fetched.', type: Books})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    public async addBook(@Body() Book: Books) {
+    public async addBook(@Body() Book: CreateBooks) {
         const book = await this.booksService.create(Book);
         return book;
     }
@@ -39,4 +39,10 @@ export class BooksController {
     public async deleteBook(@Param('id') id: string): Promise<any> {
         return this.booksService.delete(id);
     }
+
+    @Put(':id')
+    public update(@Body() updBook: CreateBooks, @Param('id') id: string): Promise<Books> {
+        return this.booksService.update(id, updBook);
+
+  }
 }

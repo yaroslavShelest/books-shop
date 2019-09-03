@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BooksRepository } from 'src/repozitories/repozitories.books';
 import { Books } from 'src/model/books.model';
+import { CreateBooks } from 'src/model/index';
 
 @Injectable()
 export class BooksService {
@@ -9,14 +10,13 @@ export class BooksService {
     }
 
     public async getAll(): Promise<Books[]> {
-        const book = await this.bookServiceRepository.getAll();
-        return book;
+        return await this.bookServiceRepository.getAll();
       }
 
     public async getOneBook(id: string): Promise<Books> {
         return await this.bookServiceRepository.getOneBook(id);
     }
-    public async create(book: Books): Promise<Books> {
+    public async create(book: CreateBooks): Promise<Books> {
         return await this.bookServiceRepository.create(book);
     }
 
@@ -24,7 +24,7 @@ export class BooksService {
         return await this.bookServiceRepository.delete(id);
     }
 
-    public async update(id: string, book: Books): Promise<Books> {
+    public async update(id: string, book: CreateBooks): Promise<Books> {
         return await this.bookServiceRepository.update(id, book);
  }
 }

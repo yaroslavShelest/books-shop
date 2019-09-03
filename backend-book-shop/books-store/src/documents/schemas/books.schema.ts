@@ -7,7 +7,9 @@ export const BooksSchema = new mongoose.Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Authors',
         }],
-    coast: String,
+//    author: [],
+
+    coast: Number,
 });
 //  const BookModel = mongoose.model('Books', BooksSchema,'books');
 

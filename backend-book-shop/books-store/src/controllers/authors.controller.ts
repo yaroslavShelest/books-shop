@@ -28,7 +28,7 @@ export class AuthorsController {
         @Post('')
         @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Authors})
         @ApiResponse({ status: 403, description: 'Forbidden.'})
-        public createAuthor(@Body() newAuthor: Authors): Promise<Authors> {
+        public createAuthor(@Body() newAuthor: CreateAuthors): Promise<Authors> {
             return  this.authorService.create(newAuthor);
         }
 
@@ -42,7 +42,7 @@ export class AuthorsController {
         @Put(':id')
         @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Authors})
         @ApiResponse({ status: 403, description: 'Forbidden.'})
-        public editAuthor(@Body() authors: Authors, @Param('id') id: string): Promise<Authors> {
+        public editAuthor(@Body() authors: CreateAuthors, @Param('id') id: string): Promise<Authors> {
             const author = this.authorService.update(id, authors);
             return author;
   }

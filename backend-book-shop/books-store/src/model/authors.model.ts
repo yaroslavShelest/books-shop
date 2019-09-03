@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 
 export class Authors {
     @ApiModelProperty()
-    id: string;
+    id?: string;
     @ApiModelProperty()
     firstName: string;
     @ApiModelProperty()

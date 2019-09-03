@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 
 export class Books {
     @ApiModelProperty()
-    id: string;
+    id?: string;
     @ApiModelProperty()
     title: string;
     @ApiModelProperty()
@@ -11,7 +11,7 @@ export class Books {
     @ApiModelProperty()
     authors: any[];
     @ApiModelProperty()
-    coast: string;
+    coast: number;
 }
 
 export interface CreateBooks {

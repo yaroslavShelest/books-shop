@@ -1,6 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { BookDoc } from 'src/documents/documentMongo/doc.books';
+import { CreateBooks } from 'src/model/index';
 
 @Injectable()
 export class BooksRepository {
@@ -11,12 +12,10 @@ export class BooksRepository {
 
       }
 
-      async create(book: BookDoc): Promise<BookDoc> {
+      async create(book: CreateBooks): Promise<BookDoc> {
         const createdBook = new this.bookRepModel(book);
         return await createdBook
-                                .save()
-                                .populate('authors')
-                                .exec();
+                                .save();
       }
 
       async getAll(): Promise<BookDoc[]> {
@@ -41,7 +40,7 @@ export class BooksRepository {
                                       .exec();
       }
 
-      async update(id: string, book: BookDoc): Promise<BookDoc> {
+      async update(id: string, book: CreateBooks): Promise<BookDoc> {
         return await this.bookRepModel
                                       .findByIdAndUpdate(id, book, { new: true })
                                       .populate('authors')
