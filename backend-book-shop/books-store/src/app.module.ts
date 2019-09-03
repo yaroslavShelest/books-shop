@@ -11,21 +11,18 @@ import { AuthController, BooksController, UsersController, AuthorsController } f
 import { AuthService, BooksService, UsersService, AuthorsService } from 'src/services/index';
 
 // Provaiders
-import { DatabaseProviders } from 'src/providers/data.base.provaiders';
-import { BooksProviders } from 'src/providers/books.provaiders';
-import { UsersProviders } from 'src/providers/users.provaiders';
-import { AuthorProviders } from 'src/providers/authors.provaiders';
+import { DatabaseProviders , BooksProviders , UsersProviders , AuthorProviders } from 'src/providers/index';
 
 // Repositories
-import { BooksRepository } from 'src/repozitories/repozitories.books';
-import { UserRepository } from 'src/repozitories/repozitories.users';
-import { AuthorRepository } from 'src/repozitories/repozitories.authors';
+import { BooksRepository , UserRepository , AuthorRepository } from 'src/repozitories/index';
 
 // jwt
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { jwtConstants } from 'src/strategy/constants';
 import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from 'src/strategy/strategy';
+// config
+import { ConfigService } from 'src/environments/config/config.service';
 
 @Module({
   imports:
@@ -33,8 +30,7 @@ import { LocalStrategy } from 'src/strategy/strategy';
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {
-        expiresIn: '600s',
-
+        expiresIn: '650s',
       },
     }),
   ],
@@ -47,6 +43,10 @@ import { LocalStrategy } from 'src/strategy/strategy';
                {
                 provide: APP_GUARD,
                 useClass: RolesGuard,
+                },
+                {
+                  provide: ConfigService,
+                  useValue: new ConfigService(`${process.env.NODE_ENV}.env`),
                 },
                 AuthService,
                 AuthorsService,

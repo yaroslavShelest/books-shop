@@ -6,5 +6,6 @@ export interface UserDoc extends Document  {
     email: string;
     password: string;
     roleOfUser: boolean;
-    createdDate: Date;
+    created: Date;
+    confirmPassword: boolean;
 }

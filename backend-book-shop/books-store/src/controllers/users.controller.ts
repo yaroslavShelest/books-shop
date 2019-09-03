@@ -16,7 +16,7 @@ export class UsersController {
     @Get('getAll')
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: Users})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    @Roles('admin')
+    // @Roles('admin')
     public getAll(): Promise<Users[]> {
         return this.usersService.getAll();
     }

@@ -21,7 +21,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  @ApiResponse({ status: 201, description: 'The TOKEN has been successfully fetched.'})
+  @ApiResponse({ status: 201, description: 'The TOKENS has been successfully fetched.'})
   @ApiResponse({ status: 403, description: 'Forbidden.'})
   getProfile(@Request() req) {
     return req.user;

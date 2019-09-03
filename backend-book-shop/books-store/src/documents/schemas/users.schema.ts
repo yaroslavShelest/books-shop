@@ -5,4 +5,5 @@ export const UsersSchema = new mongoose.Schema({
     password: String,
     roleOfUser: Boolean,
     created: { type: Date, default: Date.now },
+    confirmPassword: Boolean,
 });

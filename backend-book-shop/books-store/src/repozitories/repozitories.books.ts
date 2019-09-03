@@ -10,21 +10,41 @@ export class BooksRepository {
       ) {
 
       }
+
       async create(book: BookDoc): Promise<BookDoc> {
         const createdBook = new this.bookRepModel(book);
-        return await createdBook.save();
+        return await createdBook
+                                .save()
+                                .populate('authors')
+                                .exec();
       }
+
       async getAll(): Promise<BookDoc[]> {
-        return await this.bookRepModel.find().exec();
+        return await this.bookRepModel
+                                      .find()
+                                      .populate('authors')
+                                      .exec();
       }
+
       async getOneBook(id: string): Promise<BookDoc> {
         const param = { _id: id };
-        return await this.bookRepModel.findOne({param });
+        return await this.bookRepModel
+                                      .findOne({param})
+                                      .populate('authors')
+                                      .exec();
       }
+
       async delete(id: string): Promise<BookDoc> {
-        return await this.bookRepModel.findByIdAndRemove(id);
+        return await this.bookRepModel
+                                      .findByIdAndRemove(id)
+                                      .populate('authors')
+                                      .exec();
       }
+
       async update(id: string, book: BookDoc): Promise<BookDoc> {
-        return await this.bookRepModel.findByIdAndUpdate(id, book, { new: true });
+        return await this.bookRepModel
+                                      .findByIdAndUpdate(id, book, { new: true })
+                                      .populate('authors')
+                                      .exec();
       }
 }

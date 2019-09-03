@@ -4,7 +4,8 @@ import { Books } from 'src/model/books.model';
 
 @Injectable()
 export class BooksService {
-    constructor(private readonly bookServiceRepository: BooksRepository) {
+    constructor(
+        private readonly bookServiceRepository: BooksRepository) {
     }
 
     public async getAll(): Promise<Books[]> {

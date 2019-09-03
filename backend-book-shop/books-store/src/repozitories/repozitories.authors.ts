@@ -10,21 +10,38 @@ export class AuthorRepository {
   ) {}
 
   async getAll(): Promise<AuthorDoc[]> {
-    return await this.authorRepModel.find().exec();
+    return await this.authorRepModel
+                                    .find()
+                                    .populate('books')
+                                    .exec();
   }
 
   async getOneAuthor(id: string): Promise<AuthorDoc> {
-    return await this.authorRepModel.findById(id);
-}
+    return await this.authorRepModel
+                                    .findById(id)
+                                    .populate('books')
+                                    .exec();
+  }
 
   async create(author: AuthorDoc): Promise<AuthorDoc> {
     const createdAuthor = new this.authorRepModel(author);
-    return  await createdAuthor.save();
-}
+    return  await createdAuthor
+                              .save()
+                              .populate('books')
+                              .exec();
+  }
+
   async update(id: string, Author: AuthorDoc): Promise<AuthorDoc> {
-    return await this.authorRepModel.findByIdAndUpdate(id, Author, { new: true });
-}
+    return await this.authorRepModel
+                                    .findByIdAndUpdate(id, Author, { new: true })
+                                    .populate('books')
+                                    .exec();
+  }
+
   async delete(id: string): Promise<AuthorDoc> {
-    return await this.authorRepModel.findByIdAndRemove(id);
-}
+    return await this.authorRepModel
+                                    .findByIdAndRemove(id)
+                                    .populate('books')
+                                    .exec();
+  }
 }

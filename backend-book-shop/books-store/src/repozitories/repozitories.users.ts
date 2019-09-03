@@ -28,9 +28,11 @@ export class UserRepository {
     async update(id: string, user: UserDoc): Promise<UserDoc> {
         return await this.userRepModel.findByIdAndUpdate(id, user, { new: true });
       }
+
     async delete(id: string): Promise<UserDoc> {
         return await this.userRepModel.findByIdAndRemove(id);
       }
+
     async findOneByName(userlogin: string): Promise<UserDoc> {
         return await this.userRepModel.findOne( { username: userlogin} );
       }
