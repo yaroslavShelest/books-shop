@@ -12,7 +12,7 @@ export class BooksRepository {
 
       }
 
-      async create(book: BookDoc): Promise<BookDoc> {
+      async create(book: CreateBooks): Promise<BookDoc> {
         const createdBook = new this.bookRepModel(book);
         return await createdBook
                                 .save();

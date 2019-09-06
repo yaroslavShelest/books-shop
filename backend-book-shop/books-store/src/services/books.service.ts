@@ -16,7 +16,7 @@ export class BooksService {
     public async getOneBook(id: string): Promise<Books> {
         return await this.bookServiceRepository.getOneBook(id);
     }
-    public async create(book: Books): Promise<Books> {
+    public async create(book: CreateBooks): Promise<Books> {
         return await this.bookServiceRepository.create(book);
     }
 
