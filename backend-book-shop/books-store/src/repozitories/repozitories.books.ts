@@ -12,7 +12,7 @@ export class BooksRepository {
 
       }
 
-      async create(book: CreateBooks): Promise<BookDoc> {
+      async create(book: BookDoc): Promise<BookDoc> {
         const createdBook = new this.bookRepModel(book);
         return await createdBook
                                 .save();
@@ -40,10 +40,16 @@ export class BooksRepository {
                                       .exec();
       }
 
-      async update(id: string, book: CreateBooks): Promise<BookDoc> {
+      async update(id: string, book: BookDoc): Promise<BookDoc> {
         return await this.bookRepModel
                                       .findByIdAndUpdate(id, book, { new: true })
                                       .populate('authors')
                                       .exec();
+      }
+
+      async deleteAuthorFromBooks(id: string) {
+        return  await this.bookRepModel
+                                        .updateMany({authors: id},
+                                                  {$pull: {authors: id}});
       }
 }

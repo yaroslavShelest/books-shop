@@ -24,7 +24,7 @@ export class AuthorRepository {
                                     .exec();
   }
 
-  async create(author: CreateAuthors): Promise<AuthorDoc> {
+  async create(author: AuthorDoc): Promise<AuthorDoc> {
     const createdAuthor = new this.authorRepModel(author);
     return  await createdAuthor
                               .save();
@@ -42,5 +42,11 @@ export class AuthorRepository {
                                     .findByIdAndRemove(id)
                                     .populate('books')
                                     .exec();
+  }
+
+  async deleteBooksFromAuthours(id: string) {
+    return  await this.authorRepModel
+                                    .updateMany({books: id},
+                                                {$pull: {books: id}});
   }
 }

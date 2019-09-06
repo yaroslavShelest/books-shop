@@ -16,7 +16,7 @@ export class AuthorsService {
         return this.authorRepository.getOneAuthor( id );
     }
 
-    async create(author: CreateAuthors): Promise<Authors> {
+    async create(author: Authors): Promise<Authors> {
         return  this.authorRepository.create(author);
     }
 
