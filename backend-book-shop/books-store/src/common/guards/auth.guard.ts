@@ -1,5 +1,4 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
@@ -15,7 +14,7 @@ export class RolesGuard implements CanActivate {
     }
 
     const request = context.switchToHttp().getRequest();
-    const user = request.user; // Не определен. Тут вроде undefind . Или я вообще запутался)))
+    const user = request.user;
     const hasRole = () =>
       user.roles.some((roleOfUser) => roles.includes(roleOfUser));
     return user && user.roles && hasRole();

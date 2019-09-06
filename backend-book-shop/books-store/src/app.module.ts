@@ -30,7 +30,7 @@ import { ConfigService } from 'src/environments/config/config.service';
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {
-        expiresIn: '650s',
+        expiresIn: '950s',
       },
     }),
   ],

@@ -24,6 +24,7 @@ export class UsersController {
     @Get('getUserById/:id')
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: Users})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
+     // @Roles('admin')
     public getUserById(@Param('id') id: string): Promise<Users> {
         return this.usersService.getOneUser(id);
     }
