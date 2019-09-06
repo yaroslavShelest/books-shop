@@ -50,6 +50,6 @@ export class BooksRepository {
       async deleteAuthorFromBooks(id: string) {
         return  await this.bookRepModel
                                         .updateMany({authors: id},
-                                                  {$pull: {authors: id}});
+                                                    {$pull: {authors: id}});
       }
 }
