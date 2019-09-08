@@ -24,6 +24,7 @@ export class AuthorRepository {
                                     .exec();
   }
 
+<<<<<<< HEAD
   async create(author: CreateAuthors): Promise<AuthorDoc> {
     const createdAuthor = new this.authorRepModel(author);
     return await createdAuthor.save((err, createdauthor) => {
@@ -31,6 +32,12 @@ export class AuthorRepository {
                     .populate('books')
                     .execPopulate();
   });
+=======
+  async create(author: AuthorDoc): Promise<AuthorDoc> {
+    const createdAuthor = new this.authorRepModel(author);
+    return  await createdAuthor
+                              .save();
+>>>>>>> 7acf8d3a9bc63cda603c9a9e1a33156cdd03e9b0
   }
 
   async update(id: string, Author: CreateAuthors): Promise<AuthorDoc> {

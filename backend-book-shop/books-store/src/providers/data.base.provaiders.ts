@@ -9,8 +9,12 @@ export const DatabaseProviders = [
   {
     provide: 'DATABASE_CONNECTION',
     useFactory: (): Promise<typeof mongoose> =>
+<<<<<<< HEAD
     mongoose.connect(key.mongoURI , {
       useNewUrlParser: true,
     }),
+=======
+    mongoose.connect(key.mongoURI),
+>>>>>>> 7acf8d3a9bc63cda603c9a9e1a33156cdd03e9b0
   },
 ];
