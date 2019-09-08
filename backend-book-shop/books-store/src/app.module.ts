@@ -1,21 +1,38 @@
 // Main
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-//Controllers
-import { AuthController, BooksController,UsersController,AuthorsController } from 'src/controllers/index';
-//Services
-import { AuthService,BooksService,UsersService, AuthorsService } from 'src/services/index';
-//Schemas
-import { BooksSchema, UsersSchema } from 'src/documents/schemas/index';
-import config from "src/environments/config/keys";
+import { PassportModule } from '@nestjs/passport';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'src/common/guards/auth.guard';
+
+// Controllers
+import { AuthController, BooksController, UsersController, AuthorsController } from 'src/controllers/index';
+
+// Services
+import { AuthService, BooksService, UsersService, AuthorsService } from 'src/services/index';
+
+// Provaiders
+import { DatabaseProviders , BooksProviders , UsersProviders , AuthorProviders } from 'src/providers/index';
+
+// Repositories
+import { BooksRepository , UserRepository , AuthorRepository } from 'src/repozitories/index';
+
+// jwt
+import { JwtStrategy } from 'src/strategy/jwt.strategy';
+import { jwtConstants } from 'src/strategy/constants';
+import { JwtModule } from '@nestjs/jwt';
+import { LocalStrategy } from 'src/strategy/strategy';
+// config
+import { ConfigService } from 'src/environments/config/config.service';
 
 @Module({
-  imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),
-    MongooseModule.forFeature([
-      { name: 'Books', schema: BooksSchema },
-      { name: 'Users', schema: UsersSchema }
-    ]
-  )
+  imports:
+   [ PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: {
+        expiresIn: '950s',
+      },
+    }),
   ],
   controllers: [
                 AuthorsController,
@@ -23,9 +40,27 @@ import config from "src/environments/config/keys";
                 BooksController,
                 UsersController],
   providers:   [
+               {
+                provide: APP_GUARD,
+                useClass: RolesGuard,
+                },
+                // {
+                //   provide: ConfigService,
+                //   useValue: new ConfigService(`${process.env.NODE_ENV}.env`),
+                // },
                 AuthService,
                 AuthorsService,
                 BooksService,
-                UsersService],
-}) 
+                UsersService,
+                BooksRepository,
+                UserRepository,
+                AuthorRepository,
+                LocalStrategy,
+                JwtStrategy,
+                ...DatabaseProviders,
+                ...BooksProviders,
+                ...UsersProviders,
+                ...AuthorProviders,
+                ],
+})
 export class AppModule {}
