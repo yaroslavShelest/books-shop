@@ -36,8 +36,14 @@ export class AuthService {
           role: user.role,
         };
 
-        const validtoken =  this.jwtService.sign(payload);
+        const validtoken = this.jwtService.sign(payload);
 
-        return null
+        const logginedUser: LoginResponse = {
+          username: payload.username,
+          role: payload.role,
+          token: validtoken,
+        };
+
+        return logginedUser;
       }
 }
