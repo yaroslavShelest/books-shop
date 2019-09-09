@@ -1,6 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { UserDoc } from 'src/documents/documentMongo/doc.users';
+import { CreateUser } from 'src/model/index';
 
 @Injectable()
 export class UserRepository {
@@ -20,7 +21,7 @@ export class UserRepository {
         return await this.userRepModel.findOne({param });
       }
 
-    async create(user: UserDoc): Promise<UserDoc> {
+    async create(user: CreateUser): Promise<UserDoc> {
         const createdUser = new this.userRepModel(user);
         return await createdUser.save();
       }

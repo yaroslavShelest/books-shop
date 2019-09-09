@@ -18,7 +18,7 @@ export class UsersService {
         return await this.usersServiceRepository.getOneUser(id);
     }
 
-    public async create(users: Users): Promise<Users> {
+    public async create(users: CreateUser): Promise<Users> {
         return await this.usersServiceRepository.create(users);
     }
 
