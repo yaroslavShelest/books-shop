@@ -9,7 +9,7 @@ import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 @ApiBearerAuth()
 
 @Controller('users')
-@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard)
 export class UsersController {
     constructor(private usersService: UsersService) {}
 

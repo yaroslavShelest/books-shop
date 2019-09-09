@@ -28,7 +28,7 @@ export class AuthService {
         const compare: boolean = await this.usersService.compareHash(password, user.password);
 
         if (!compare) {
-          throw  new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+          throw  new HttpException(`Invalid credentials ${password} = ${user.password}`, HttpStatus.BAD_REQUEST);
         }
 
         const payload: JwtPayload = {
