@@ -16,3 +16,12 @@ export class Users {
     @ApiModelProperty()
     confirmPassword: boolean;
 }
+
+export interface CreateUser {
+    readonly username: string;
+    readonly email: string;
+    readonly password: string;
+    readonly confirmPassword?: boolean;
+    readonly role: string;
+    readonly created: Date;
+}
