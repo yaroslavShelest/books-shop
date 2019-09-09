@@ -31,6 +31,11 @@ export class AuthService {
           throw  new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
         }
 
+        const payload: JwtPayload = {
+          username: user.username,
+          role: user.role,
+        };
+
         return null
       }
 }
