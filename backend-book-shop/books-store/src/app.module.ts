@@ -11,16 +11,15 @@ import { AuthController, BooksController, UsersController, AuthorsController } f
 import { AuthService, BooksService, UsersService, AuthorsService } from 'src/services/index';
 
 // Provaiders
-import { DatabaseProviders , BooksProviders , UsersProviders , AuthorProviders } from 'src/providers/index';
+import { DatabaseProviders , BooksProviders , UsersProviders , AuthorProviders } from 'src/common/providers/index';
 
 // Repositories
 import { BooksRepository , UserRepository , AuthorRepository } from 'src/repozitories/index';
 
 // jwt
-import { JwtStrategy } from 'src/strategy/jwt.strategy';
-import { jwtConstants } from 'src/strategy/constants';
+import { JwtStrategy } from 'src/common/strategy/jwt.strategy';
+import { jwtConstants } from 'src/common/strategy/constants';
 import { JwtModule } from '@nestjs/jwt';
-import { LocalStrategy } from 'src/strategy/strategy';
 // config
 import { ConfigService } from 'src/environments/config/config.service';
 
@@ -55,7 +54,6 @@ import { ConfigService } from 'src/environments/config/config.service';
                 BooksRepository,
                 UserRepository,
                 AuthorRepository,
-                LocalStrategy,
                 JwtStrategy,
                 ...DatabaseProviders,
                 ...BooksProviders,

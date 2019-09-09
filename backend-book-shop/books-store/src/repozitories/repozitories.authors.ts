@@ -24,11 +24,14 @@ export class AuthorRepository {
                                     .exec();
   }
 
-  async create(author: AuthorDoc): Promise<AuthorDoc> {
+  async create(author: CreateAuthors): Promise<AuthorDoc> {
     const createdAuthor = new this.authorRepModel(author);
-    return  await createdAuthor
-                              .save();
-  }
+    return await createdAuthor.save((err, createdauthor) => {
+      createdauthor
+                    .populate('books')
+                    .execPopulate();
+  });
+}
 
   async update(id: string, Author: CreateAuthors): Promise<AuthorDoc> {
     return await this.authorRepModel

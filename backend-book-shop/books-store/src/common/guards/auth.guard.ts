@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
@@ -15,8 +15,12 @@ export class RolesGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
     const user = request.user;
-    const hasRole = () =>
-      user.roles.some((roleOfUser) => roles.includes(roleOfUser));
-    return user && user.roles && hasRole();
+    const hasRole = (): boolean => roles.includes(user.role);
+
+    if ( user && user.role && hasRole() ) {
+      return true;
+      } else {
+      throw new HttpException('You do not have premmission (Roles)', HttpStatus.UNAUTHORIZED);
+      }
+    }
   }
-}

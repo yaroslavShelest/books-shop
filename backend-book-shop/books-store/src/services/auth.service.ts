@@ -1,6 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus  } from '@nestjs/common';
 import { UsersService } from 'src/services/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from 'src/model/jwt-payload.model';
+import { UserLogin } from 'src/model/user-auth.model';
+import { LoginResponse } from 'src/model/login-res.model';
 
 @Injectable()
 export class AuthService {
@@ -8,23 +11,26 @@ export class AuthService {
       private readonly usersService: UsersService,
       private readonly jwtService: JwtService) {
 
-      }
-
-    async validateUser(username: string, pass: string): Promise<any> {
-        const user = await this.usersService.findOneByUsername(username);
-        if (user && user.password === pass) {
-            const { password, ...result } = user;
-            return result;
-        }
-        return null;
     }
 
-    getToken(user: any): string {
-        const payload: any = {};
-        payload.username = user.username;
-        payload.password = user.password ;
+    async validateUser(payload: JwtPayload): Promise<any> {
+        return await this.usersService.findOneByUsername(payload.username);
+     }
 
-        const accessToken: string = this.jwtService.sign(payload);
-        return accessToken;
+    async login(loginModel: UserLogin): Promise<LoginResponse> {
+        const {username, password} = loginModel;
+        const user =  await this.usersService.findOneByUsername(username);
+
+        if (!user) {
+          throw  new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+        }
+
+        const compare: boolean = await this.usersService.compareHash(password, user.password);
+
+        if (!compare) {
+          throw  new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+        }
+
+        return null
       }
 }
