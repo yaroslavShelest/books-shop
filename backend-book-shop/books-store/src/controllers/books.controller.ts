@@ -1,7 +1,10 @@
-import { Controller, Body, Param, Post, Put, Get, Delete} from '@nestjs/common';
+import { Controller, Body, Param, Post, Put, Get, Delete, UseGuards} from '@nestjs/common';
 import { Books , CreateBooks} from 'src/model/index';
 import { BooksService } from 'src/services/books.service';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
+import { RolesGuard } from 'src/common/guards/auth.guard';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('books')
 @ApiBearerAuth()
@@ -26,6 +29,8 @@ export class BooksController {
     }
 
     @Post('create')
+    @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     @ApiResponse({ status: 201, description: 'The books has been successfully fetched.', type: Books})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     public async addBook(@Body() Book: CreateBooks) {
@@ -43,6 +48,5 @@ export class BooksController {
     @Put(':id')
     public update(@Body() updBook: CreateBooks, @Param('id') id: string): Promise<Books> {
         return this.booksService.update(id, updBook);
-
-  }
+    }
 }

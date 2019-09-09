@@ -26,5 +26,5 @@ export class BooksService {
 
     public async update(id: string, book: CreateBooks): Promise<Books> {
         return await this.bookServiceRepository.update(id, book);
- }
+    }
 }
