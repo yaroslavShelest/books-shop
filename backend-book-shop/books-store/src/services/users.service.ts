@@ -8,7 +8,6 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
     constructor(
         private readonly usersServiceRepository: UserRepository) {}
-        private saltRounds = 10;
 
     public async getAll(): Promise<Users[]> {
         return await this.usersServiceRepository.getAll();
@@ -19,11 +18,23 @@ export class UsersService {
     }
 
     public async create(users: CreateUser): Promise<Users> {
-        return await this.usersServiceRepository.create(users);
+        const { username, password, email, confirmPassword , role , created} = users;
+        const salt = await bcrypt.genSalt(10);
+
+        const newuser: CreateUser = {
+            username,
+            password: await this.getHash(password, salt),
+            email,
+            confirmPassword,
+            role,
+            created,
+          };
+
+        return await this.usersServiceRepository.create(newuser);
     }
 
-    public async getHash(password: string): Promise<string> {
-        return await bcrypt.hash(password, this.saltRounds);
+    public async getHash(password: string , saltRounds ): Promise<string> {
+        return await bcrypt.hash(password, saltRounds);
     }
 
     public async compareHash(password: string, hash: string): Promise<boolean> {
