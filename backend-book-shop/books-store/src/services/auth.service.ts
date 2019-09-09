@@ -36,6 +36,8 @@ export class AuthService {
           role: user.role,
         };
 
+        const validtoken =  this.jwtService.sign(payload);
+
         return null
       }
 }
