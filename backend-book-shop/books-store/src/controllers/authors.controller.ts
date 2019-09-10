@@ -1,7 +1,10 @@
-import { Controller,  Get, Param, Body, Post, Put, Delete} from '@nestjs/common';
+import { Controller,  Get, Param, Body, Post, Put, Delete, UseGuards} from '@nestjs/common';
 import { AuthorsService } from 'src/services/index';
 import { Authors , CreateAuthors} from 'src/model/index';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
+import { RolesGuard } from 'src/common/guards/auth.guard';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('authors')
 @ApiBearerAuth()
@@ -12,6 +15,7 @@ export class AuthorsController {
         private readonly authorService: AuthorsService) {}
 
         @Get('getAll')
+        @UseGuards(AuthGuard('jwt'), RolesGuard)
         @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Authors})
         @ApiResponse({ status: 403, description: 'Forbidden.'})
         public getAll(): Promise<Authors[]> {
@@ -19,6 +23,7 @@ export class AuthorsController {
         }
 
         @Get('getAuthorById/:id')
+        @UseGuards(AuthGuard('jwt'), RolesGuard)
         @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Authors})
         @ApiResponse({ status: 403, description: 'Forbidden.'})
         public getAuthorById(@Param('id') id: string): Promise<Authors> {
@@ -26,6 +31,7 @@ export class AuthorsController {
         }
 
         @Post('')
+        @UseGuards(AuthGuard('jwt'), RolesGuard)
         @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Authors})
         @ApiResponse({ status: 403, description: 'Forbidden.'})
         public createAuthor(@Body() newAuthor: CreateAuthors): Promise<Authors> {
@@ -33,6 +39,7 @@ export class AuthorsController {
         }
 
         @Delete('delete/:id')
+        @UseGuards(AuthGuard('jwt'), RolesGuard)
         @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Authors})
         @ApiResponse({ status: 403, description: 'Forbidden.'})
         public async deleteUser(@Param(':id') userID) {
@@ -40,6 +47,7 @@ export class AuthorsController {
         }
 
         @Put(':id')
+        @UseGuards(AuthGuard('jwt'), RolesGuard)
         @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Authors})
         @ApiResponse({ status: 403, description: 'Forbidden.'})
         public editAuthor(@Body() authors: CreateAuthors, @Param('id') id: string): Promise<Authors> {

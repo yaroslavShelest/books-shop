@@ -4,8 +4,6 @@ import { BooksService } from 'src/services/books.service';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 import { RolesGuard } from 'src/common/guards/auth.guard';
 import { Roles } from 'src/common/decorators/roles.decorator';
-import { SetMetadata } from '@nestjs/common';
-
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('books')

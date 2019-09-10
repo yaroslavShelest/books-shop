@@ -1,8 +1,6 @@
-import { Controller, UseGuards, Post, Request, Get, Body} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Controller, Post, Get, Body} from '@nestjs/common';
 import { AuthService , UsersService } from 'src/services/index';
 import { LoginResponse } from 'src/model/login-res.model';
-import { Roles } from 'src/common/decorators/roles.decorator';
 import { UserLogin } from 'src/model/user-auth.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
@@ -12,8 +10,7 @@ import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 @Controller('login')
 export class AuthController {
   constructor(
-    private readonly authService: AuthService,
-    private readonly userService: UsersService) {}
+    private readonly authService: AuthService) {}
 
   @Post()
   @ApiResponse({ status: 201, description: 'The TOKENS has been successfully fetched.'})
