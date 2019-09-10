@@ -1,22 +1,23 @@
 import { Controller, Get, Body, Post, Response, Delete, HttpStatus, Param, Put, NotFoundException, UseGuards} from '@nestjs/common';
 import { UsersService } from 'src/services/index';
+import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/common/guards/auth.guard';
 import { Users } from 'src/model/users.model';
-import { Roles } from 'src/common/guards/roles.decorator';
+import { Roles } from 'src/common/decorators/roles.decorator';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiUseTags('users')
 @ApiBearerAuth()
 
 @Controller('users')
-@UseGuards(RolesGuard)
+
 export class UsersController {
     constructor(private usersService: UsersService) {}
 
     @Get('getAll')
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: Users})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    // @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     public getAll(): Promise<Users[]> {
         return this.usersService.getAll();
     }
@@ -24,7 +25,8 @@ export class UsersController {
     @Get('getUserById/:id')
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: Users})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-     // @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
+    @Roles('admin')
     public getUserById(@Param('id') id: string): Promise<Users> {
         return this.usersService.getOneUser(id);
     }
@@ -32,7 +34,8 @@ export class UsersController {
     @Post('')
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: Users})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    // @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
+    @Roles('admin')
     public async addUser(@Response() res, @Body() user: Users) {
         const newUser = await this.usersService.create(user);
         return res.status(HttpStatus.OK).json({
@@ -44,13 +47,16 @@ export class UsersController {
     @Put(':id')
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: Users})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
+    @Roles('admin')
     public async editUser(@Param('id') user: Users, @Body() id: string) {
         const users = await this.usersService.update(user , id);
         return users;
     }
 
     @Delete('delete/:id')
-    // @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
+    @Roles('admin')
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: Users})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     public async deleteUser(@Param(':id') userID) {

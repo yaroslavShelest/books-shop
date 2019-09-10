@@ -12,20 +12,14 @@ export class BooksRepository {
 
       }
 
-      async create(book: CreateBooks): Promise<BookDoc> {
-        const createdBook = new this.bookRepModel(book);
-<<<<<<< HEAD
-        const newBook: BookDoc = await createdBook.save((error, createBook) => {
+      async create(author: CreateBooks): Promise<BookDoc> {
+        const createdBook = new this.bookRepModel(author);
+        return await createdBook.save((err, createBook) => {
           createBook
-                      .populate('authors')
-                      .execPopulate();
-        });
-        return newBook;
-=======
-        return await createdBook
-                                .save();
->>>>>>> 7acf8d3a9bc63cda603c9a9e1a33156cdd03e9b0
-      }
+                        .populate('authors')
+                        .execPopulate();
+      });
+    }
 
       async getAll(): Promise<BookDoc[]> {
         return await this.bookRepModel

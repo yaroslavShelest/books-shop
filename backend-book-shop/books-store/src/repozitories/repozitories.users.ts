@@ -1,10 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { UserDoc } from 'src/documents/documentMongo/doc.users';
-<<<<<<< HEAD
 import { CreateUser } from 'src/model/index';
-=======
->>>>>>> 7acf8d3a9bc63cda603c9a9e1a33156cdd03e9b0
 
 @Injectable()
 export class UserRepository {
@@ -24,11 +21,7 @@ export class UserRepository {
         return await this.userRepModel.findOne({param });
       }
 
-<<<<<<< HEAD
     async create(user: CreateUser): Promise<UserDoc> {
-=======
-    async create(user: UserDoc): Promise<UserDoc> {
->>>>>>> 7acf8d3a9bc63cda603c9a9e1a33156cdd03e9b0
         const createdUser = new this.userRepModel(user);
         return await createdUser.save();
       }
@@ -38,7 +31,7 @@ export class UserRepository {
       }
 
     async delete(id: string): Promise<UserDoc> {
-        return await this.userRepModel.findByIdAndRemove(id);
+        return await this.userRepModel.findOneAndDelete(id);
       }
 
     async findOneByName(userlogin: string): Promise<UserDoc> {

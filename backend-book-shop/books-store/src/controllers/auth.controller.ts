@@ -1,7 +1,9 @@
-import { Controller, UseGuards, Post, Request, Get, Body  } from '@nestjs/common';
-import { CreateUser } from 'src/model/users.model';
+import { Controller, UseGuards, Post, Request, Get, Body} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService , UsersService } from 'src/services/index';
+import { LoginResponse } from 'src/model/login-res.model';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { UserLogin } from 'src/model/user-auth.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiUseTags('auth')
@@ -13,26 +15,12 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly userService: UsersService) {}
 
-  @UseGuards(AuthGuard('local'))
   @Post()
   @ApiResponse({ status: 201, description: 'The TOKENS has been successfully fetched.'})
   @ApiResponse({ status: 403, description: 'Forbidden.'})
-  async login(@Request() req) {
-    return this.authService.getToken(req.body);
-  }
+  async login(@Body() user: UserLogin): Promise<LoginResponse> {
+    const loginResponse: LoginResponse = await this.authService.login(user);
 
-  @UseGuards(AuthGuard('jwt'))
-  @Get()
-  @ApiResponse({ status: 201, description: 'The TOKENS has been successfully fetched.'})
-  @ApiResponse({ status: 403, description: 'Forbidden.'})
-  getProfile(@Request() req) {
-    return req.user;
-  }
-
-  @ApiResponse({ status: 201, description: 'successfully register user.'})
-  @ApiResponse({ status: 403, description: 'Forbidden.'})
-  @Post('register')
-  async regiser(@Body() user: CreateUser): Promise<CreateUser> {
-    return await this.userService.create(user);
+    return loginResponse;
   }
 }
